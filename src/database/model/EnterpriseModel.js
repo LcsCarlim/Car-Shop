@@ -20,6 +20,10 @@ const Enterprise = new mongoose.Schema({
   owner_id: {
     type: String,
     required: true
+  },
+  balance: {
+    type: Number,
+    default: 0
   }
 },
 {

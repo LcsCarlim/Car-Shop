@@ -26,4 +26,8 @@ routes.post('/deposit',
   userAuth,
   UserController.depositAmount
 );
+
+routes.post('/buycar/:CNPJ',
+  userAuth,
+  UserController.buyCar);
 module.exports = routes;

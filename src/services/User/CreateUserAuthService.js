@@ -9,9 +9,9 @@ module.exports = async (email, password) => {
   });
   if (!user) throw new Error("User doesn't exists!");
 
-  const wrongPassword = await compare(password, user.password);
+  const correctPassword = await compare(password, user.password);
 
-  if (!wrongPassword) throw new Error('Invalid password!');
+  if (!correctPassword) throw new Error('Invalid password!');
 
   const secret = process.env.ACCESS_TOKEN;
 
@@ -21,6 +21,6 @@ module.exports = async (email, password) => {
   },
   secret
   );
-  // algum
+
   return token;
 };

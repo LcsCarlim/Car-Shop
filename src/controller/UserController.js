@@ -5,6 +5,7 @@ const createUserAuthService = require('../services/User/CreateUserAuthService');
 const listAllInformation = require('../services/User/ListAllInformationService');
 const { tokenIsInListing, addTokenToListing } = require('../middlewares/TokenListingMiddleware');
 const depositAmountService = require('../services/User/DepositAmountService');
+const buyCarService = require('../services/User/BuyCarService');
 
 module.exports = {
   async createUser (req, res) {
@@ -125,6 +126,25 @@ module.exports = {
         balance
       );
       res.status(200).json(deposit);
+    } catch (error) {
+      res.status(400).json({
+        error: 'Something wrong happened, try again',
+        message: error.message
+      });
+    }
+  },
+  async buyCar (req, res) {
+    try {
+      const { id } = req.user;
+      const { CNPJ } = req.params;
+      const { balance } = req.body;
+
+      const transfer = await buyCarService(
+        id,
+        CNPJ,
+        balance
+      );
+      res.status(200).json(transfer);
     } catch (error) {
       res.status(400).json({
         error: 'Something wrong happened, try again',
