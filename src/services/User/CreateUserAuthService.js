@@ -21,6 +21,6 @@ module.exports = async (email, password) => {
   },
   secret
   );
-
+  // algum
   return token;
 };
