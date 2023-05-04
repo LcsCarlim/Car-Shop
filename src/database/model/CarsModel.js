@@ -53,9 +53,17 @@ const Car = new mongoose.Schema({
     type: String,
     required: true
   },
-  enterprise_id: {
+  owner_id: {
     type: String,
     required: false
+  },
+  from_enterprise: {
+    type: String,
+    required: false
+  },
+  status: {
+    type: String,
+    default: 'Available'
   }
 
 },

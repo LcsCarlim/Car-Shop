@@ -28,4 +28,12 @@ routes.delete('/delete/:id',
   userAuth,
   CarController.delete);
 
+routes.get('/status/available/:status',
+  CarController.findStatusAvailable
+);
+
+routes.get('/status/sold/:status',
+  CarController.findStatusSold
+);
+
 module.exports = routes;

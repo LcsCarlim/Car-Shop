@@ -3,6 +3,8 @@ const getAnnouncement = require('../services/Car/GetAnnouncementService');
 const findAnnouncementByName = require('../services/Car/FindAnnouncementByNameService');
 const detailsService = require('../services/Car/DetailsService');
 const deleteAnnouncementService = require('../services/Car/DeleteAnnouncementService');
+const findStatusAvailableService = require('../services/Car/FindStatusAvailableService');
+const findStatusSoldService = require('../services/Car/FindStatusSoldService');
 
 module.exports = {
   async createCar (req, res) {
@@ -27,7 +29,8 @@ module.exports = {
           KM,
           accessories,
           description,
-          enterprise_id: id
+          owner_id: id,
+          from_enterprise: id
         });
       return res.status(201).json(accounts);
     } catch (error) {
@@ -81,6 +84,31 @@ module.exports = {
         deleteCar,
         message: 'Car deleted!'
       });
+    } catch (error) {
+      res.status(400).json({
+        error: 'Something wrong happened, try again',
+        message: error.message
+      });
+    }
+  },
+  async findStatusAvailable (req, res) {
+    const { status } = req.params;
+    try {
+      const availableStatus = await findStatusAvailableService(status);
+
+      res.status(200).json(availableStatus);
+    } catch (error) {
+      res.status(400).json({
+        error: 'Something wrong happened, try again',
+        message: error.message
+      });
+    }
+  },
+  async findStatusSold (req, res) {
+    const { status } = req.params;
+    try {
+      const statusSold = await findStatusSoldService(status);
+      res.status(200).json(statusSold);
     } catch (error) {
       res.status(400).json({
         error: 'Something wrong happened, try again',

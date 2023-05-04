@@ -21,6 +21,7 @@ module.exports = async () => {
         color: newAnounce.color,
         year: newAnounce.year,
         price: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(newAnounce.price),
+        status: newAnounce.status,
         id: newAnounce._id
       };
     })

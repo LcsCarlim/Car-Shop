@@ -2,10 +2,12 @@ const Joi = require('joi');
 
 const createUserService = require('../services/User/CreateUserService');
 const createUserAuthService = require('../services/User/CreateUserAuthService');
-const listAllInformation = require('../services/User/ListAllInformationService');
+const listAllInformationService = require('../services/User/ListAllInformationService');
 const { tokenIsInListing, addTokenToListing } = require('../middlewares/TokenListingMiddleware');
 const depositAmountService = require('../services/User/DepositAmountService');
 const buyCarService = require('../services/User/BuyCarService');
+const getUserSelfInfoService = require('../services/User/GetUserSelfInfoService');
+const findUserByIdService = require('../services/User/FindUserByIdService');
 
 module.exports = {
   async createUser (req, res) {
@@ -17,7 +19,8 @@ module.exports = {
       last_name: Joi.string()
         .required(),
       email: Joi.string()
-        .email(),
+        .email()
+        .required(),
       password: Joi.string()
         .required()
         .min(6),
@@ -25,22 +28,14 @@ module.exports = {
         .required()
         .min(6),
       phone_number: Joi.string()
-        .required()
-        .min(11),
+        .min(11)
+        .required(),
       address: Joi.string()
         .required()
     });
 
     try {
-      await schema.validateAsync({
-        name,
-        last_name,
-        email,
-        password,
-        confirm_password,
-        phone_number,
-        address
-      });
+      await schema.validateAsync(req.body);
 
       const users = await createUserService({
         name,
@@ -74,12 +69,9 @@ module.exports = {
     });
 
     try {
-      await schema.validateAsync({
-        email,
-        password
-      });
+      await schema.validateAsync(req.body);
 
-      const usersAuth = await createUserAuthService(email, password);
+      const usersAuth = await createUserAuthService({ email, password });
 
       res.status(200).json({
         message: 'Authentication successful',
@@ -108,7 +100,7 @@ module.exports = {
   async list (req, res) {
     const { role } = req.user;
     try {
-      const users = await listAllInformation({ role });
+      const users = await listAllInformationService({ role });
       res.status(200).json(users);
     } catch (error) {
       res.status(400).json({
@@ -136,15 +128,41 @@ module.exports = {
   async buyCar (req, res) {
     try {
       const { id } = req.user;
-      const { CNPJ } = req.params;
+      const { CNPJ, carId } = req.params;
       const { balance } = req.body;
 
       const transfer = await buyCarService(
         id,
         CNPJ,
-        balance
+        balance,
+        carId
       );
       res.status(200).json(transfer);
+    } catch (error) {
+      res.status(400).json({
+        error: 'Something wrong happened, try again',
+        message: error.message
+      });
+    }
+  },
+  async getUserSelf (req, res) {
+    const { id } = req.user;
+    try {
+      const getUser = await getUserSelfInfoService(id);
+      res.status(200).json(getUser);
+    } catch (error) {
+      res.status(400).json({
+        error: 'Something wrong happened, try again',
+        message: error.message
+      });
+    }
+  },
+  async findById (req, res) {
+    const { id } = req.params;
+    const { role } = req.user;
+    try {
+      const findId = await findUserByIdService(id, role);
+      res.status(200).json(findId);
     } catch (error) {
       res.status(400).json({
         error: 'Something wrong happened, try again',

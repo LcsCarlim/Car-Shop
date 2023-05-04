@@ -21,11 +21,6 @@ const User = new mongoose.Schema({
     required: true,
     selector: false
   },
-  confirm_password: {
-    type: String,
-    required: true,
-    selector: false
-  },
   address: {
     type: String,
     required: true
@@ -59,12 +54,6 @@ const User = new mongoose.Schema({
 User.pre('save', async function (next) {
   const hashedPassword = await bcrypt.hash(this.password, 12);
   this.password = hashedPassword;
-
-  next();
-});
-User.pre('save', async function (next) {
-  const hashedConfirmPassword = await bcrypt.hash(this.confirm_password, 12);
-  this.confirm_password = hashedConfirmPassword;
 
   next();
 });

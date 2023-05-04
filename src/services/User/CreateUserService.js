@@ -18,7 +18,6 @@ module.exports = async ({ name, last_name, email, password, confirm_password, ph
     last_name,
     email,
     password,
-    confirm_password,
     phone_number,
     address,
     role

@@ -27,6 +27,7 @@ module.exports = async (id) => {
     combustible: car.combustible,
     KM: car.KM,
     accessories: car.accessories,
-    description: car.description
+    description: car.description,
+    status: car.status
   };
 };
