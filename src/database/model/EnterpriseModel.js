@@ -24,6 +24,10 @@ const Enterprise = new mongoose.Schema({
   balance: {
     type: Number,
     default: 0
+  },
+  cars: {
+    type: String,
+    required: false
   }
 },
 {
