@@ -1,12 +1,12 @@
-const cartService = require('../services/Cart/CartService');
-const selfCartService = require('../services/Cart/SelfCartService');
+const createUserCartService = require('../services/Cart/CreateUserCartService');
+const getUserCartService = require('../services/Cart/GetUserCartService');
 
 module.exports = {
-  async post (req, res) {
+  async create (req, res) {
     const { carId } = req.params;
     const { id } = req.user;
     try {
-      const carts = await cartService(carId, id);
+      const carts = await createUserCartService(carId, id);
       res.status(200).json(carts);
     } catch (error) {
       res.status(400).json({
@@ -15,10 +15,10 @@ module.exports = {
       });
     }
   },
-  async self (req, res) {
-    const { user_id } = req.user;
+  async get (req, res) {
+    const { id } = req.user;
     try {
-      const selfCart = await selfCartService(user_id);
+      const selfCart = await getUserCartService(id);
       res.status(200).json(selfCart);
     } catch (error) {
       res.status(400).json({

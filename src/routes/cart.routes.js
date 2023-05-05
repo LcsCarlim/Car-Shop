@@ -6,12 +6,12 @@ const CartController = require('../controller/CartController');
 
 routes.post('/:carId',
   userAuth,
-  CartController.post
+  CartController.create
 );
 
 routes.get('/self',
   userAuth,
-  CartController.self
+  CartController.get
 );
 
 module.exports = routes;
