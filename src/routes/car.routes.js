@@ -10,7 +10,8 @@ const userAuth = require('../middlewares/CheckTokenMiddleware');
 routes.post('/createcar',
   multer(carMulterConfig).single('filename'),
   enterpriseAuth,
-  CarController.createCar);
+  CarController.createCar
+);
 
 routes.get('/',
   CarController.list

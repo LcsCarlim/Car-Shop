@@ -5,9 +5,7 @@ const Cart = new mongoose.Schema({
     type: String,
     required: true
   },
-  cars: {
-    type: []
-  }
+  cars: []
 },
 {
   timestamps: {

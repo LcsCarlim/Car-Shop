@@ -9,9 +9,9 @@ routes.post('/:carId',
   CartController.post
 );
 
-// routes.update('/:carId',
-//   userAuth,
-//   CartController
-// );
+routes.get('/self',
+  userAuth,
+  CartController.self
+);
 
 module.exports = routes;
