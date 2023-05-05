@@ -1,4 +1,4 @@
-const createDocumentService = require('../services/Document/CreateDocumentService');
+const createDocumentService = require('../services/document/CreateDocumentService');
 const fs = require('fs');
 
 module.exports = {

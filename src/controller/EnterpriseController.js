@@ -1,9 +1,9 @@
-const createEnterpriseService = require('../services/Enterprise/CreateEnterpriseService');
-const enterpriseAuthService = require('../services/Enterprise/EnterpriseAuthService');
+const createEnterpriseService = require('../services/enterprise/CreateEnterpriseService');
+const enterpriseAuthService = require('../services/enterprise/EnterpriseAuthService');
 const { tokenIsInListing, addTokenToListing } = require('../middlewares/TokenListingMiddleware');
 const Joi = require('joi');
-const getEnterprisesService = require('../services/Enterprise/GetEnterprisesService');
-const findEnterpriseByIdService = require('../services/Enterprise/FindEnterpriseByIdService');
+const getEnterprisesService = require('../services/enterprise/GetEnterprisesService');
+const findEnterpriseByIdService = require('../services/enterprise/FindEnterpriseByIdService');
 
 module.exports = {
   async createEnterprise (req, res) {

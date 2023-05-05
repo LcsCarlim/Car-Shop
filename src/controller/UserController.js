@@ -1,13 +1,13 @@
 const Joi = require('joi');
 
-const createUserService = require('../services/User/CreateUserService');
-const createUserAuthService = require('../services/User/CreateUserAuthService');
-const listAllInformationService = require('../services/User/ListAllInformationService');
+const createUserService = require('../services/user/CreateUserService');
+const createUserAuthService = require('../services/user/CreateUserAuthService');
+const listAllInformationService = require('../services/user/ListAllInformationService');
 const { tokenIsInListing, addTokenToListing } = require('../middlewares/TokenListingMiddleware');
-const depositAmountService = require('../services/User/DepositAmountService');
-const buyCarService = require('../services/User/BuyCarService');
-const getUserSelfInfoService = require('../services/User/GetUserSelfInfoService');
-const findUserByIdService = require('../services/User/FindUserByIdService');
+const depositAmountService = require('../services/user/DepositAmountService');
+const buyCarService = require('../services/user/BuyCarService');
+const getUserSelfInfoService = require('../services/user/GetUserSelfInfoService');
+const findUserByIdService = require('../services/user/FindUserByIdService');
 
 module.exports = {
   async createUser (req, res) {

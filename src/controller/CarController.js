@@ -1,10 +1,10 @@
-const createCarService = require('../services/Car/CreateCarService');
-const getAnnouncement = require('../services/Car/GetAnnouncementService');
-const findAnnouncementByName = require('../services/Car/FindAnnouncementByNameService');
-const detailsService = require('../services/Car/DetailsService');
-const deleteAnnouncementService = require('../services/Car/DeleteAnnouncementService');
-const findStatusAvailableService = require('../services/Car/FindStatusAvailableService');
-const findStatusSoldService = require('../services/Car/FindStatusSoldService');
+const createCarService = require('../services/car/CreateCarService');
+const getAnnouncement = require('../services/car/GetAnnouncementService');
+const findAnnouncementByName = require('../services/car/FindAnnouncementByNameService');
+const detailsService = require('../services/car/DetailsService');
+const deleteAnnouncementService = require('../services/car/DeleteAnnouncementService');
+const findStatusAvailableService = require('../services/car/FindStatusAvailableService');
+const findStatusSoldService = require('../services/car/FindStatusSoldService');
 
 module.exports = {
   async createCar (req, res) {
