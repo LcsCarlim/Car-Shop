@@ -1,5 +1,5 @@
-const createUserCartService = require('../services/Cart/CreateUserCartService');
-const getUserCartService = require('../services/Cart/GetUserCartService');
+const createUserCartService = require('../services/cart/CreateUserCartService');
+const getUserCartService = require('../services/cart/GetUserCartService');
 
 module.exports = {
   async create (req, res) {
