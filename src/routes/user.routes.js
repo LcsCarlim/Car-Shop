@@ -6,7 +6,8 @@ const userLogout = require('../middlewares/LogoutMiddleware');
 const userAuth = require('../middlewares/CheckTokenMiddleware');
 
 routes.post('/register',
-  UserController.createUser);
+  UserController.createUser
+);
 
 routes.post('/auth',
   UserController.createUserAuth

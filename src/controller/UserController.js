@@ -1,5 +1,3 @@
-const Joi = require('joi');
-
 const createUserService = require('../services/user/CreateUserService');
 const createUserAuthService = require('../services/user/CreateUserAuthService');
 const listAllInformationService = require('../services/user/ListAllInformationService');
@@ -8,34 +6,16 @@ const depositAmountService = require('../services/user/DepositAmountService');
 const buyCarService = require('../services/user/BuyCarService');
 const getUserSelfInfoService = require('../services/user/GetUserSelfInfoService');
 const findUserByIdService = require('../services/user/FindUserByIdService');
+const UserValidator = require('../validators/UserValidator');
+const UserAuthValidator = require('../validators/UserAuthValidator');
 
 module.exports = {
   async createUser (req, res) {
-    const { name, last_name, email, password, confirm_password, phone_number, address, role } = req.body;
-
-    const schema = Joi.object({
-      name: Joi.string()
-        .required(),
-      last_name: Joi.string()
-        .required(),
-      email: Joi.string()
-        .email()
-        .required(),
-      password: Joi.string()
-        .required()
-        .min(6),
-      confirm_password: Joi.string()
-        .required()
-        .min(6),
-      phone_number: Joi.string()
-        .min(11)
-        .required(),
-      address: Joi.string()
-        .required()
-    });
-
     try {
-      await schema.validateAsync(req.body);
+      const { name, last_name, email, password, confirm_password, phone_number, cep, role } = req.body;
+
+      const validator = await UserValidator(req.body);
+      if (validator.error) throw validator.error;
 
       const users = await createUserService({
         name,
@@ -44,7 +24,7 @@ module.exports = {
         password,
         confirm_password,
         phone_number,
-        address,
+        cep,
         role
       });
 
@@ -58,18 +38,11 @@ module.exports = {
   },
 
   async createUserAuth (req, res) {
-    const { email, password } = req.body;
-
-    const schema = Joi.object({
-      email: Joi.string()
-        .email(),
-      password: Joi.string()
-        .required()
-        .min(6)
-    });
-
     try {
-      await schema.validateAsync(req.body);
+      const { email, password } = req.body;
+
+      const validatorAuth = await UserAuthValidator(req.body);
+      if (validatorAuth.error) throw validatorAuth.error;
 
       const usersAuth = await createUserAuthService({ email, password });
 

@@ -21,7 +21,7 @@ const User = new mongoose.Schema({
     required: true,
     selector: false
   },
-  address: {
+  cep: {
     type: String,
     required: true
   },

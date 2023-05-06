@@ -1,6 +1,7 @@
 const UserModel = require('../../database/model/UserModel');
+const GetCepGateway = require('../../gateway/GetCepGateway');
 
-module.exports = async ({ name, last_name, email, password, confirm_password, phone_number, address, role }) => {
+module.exports = async ({ name, last_name, email, password, confirm_password, phone_number, cep, role }) => {
   const emailExists = await UserModel.findOne({
     email
   });
@@ -9,9 +10,11 @@ module.exports = async ({ name, last_name, email, password, confirm_password, ph
   const phoneNumberExists = await UserModel.findOne({
     phone_number
   });
-  if (phoneNumberExists) throw new Error('Phone nuber already exists!');
+  if (phoneNumberExists) throw new Error('Phone number already exists!');
 
   if (password !== confirm_password) throw new Error("Password doens't match");
+
+  const response = await GetCepGateway(cep);
 
   const user = await UserModel.create({
     name,
@@ -19,7 +22,7 @@ module.exports = async ({ name, last_name, email, password, confirm_password, ph
     email,
     password,
     phone_number,
-    address,
+    cep: response.data.logradouro,
     role
   });
 
@@ -27,7 +30,7 @@ module.exports = async ({ name, last_name, email, password, confirm_password, ph
     name: user.name,
     last_name: user.last_name,
     email: user.email,
-    address: user.address,
+    address: user.cep,
     phone_number: user.phone_number,
     balance: user.balance,
     id: user._id
