@@ -2,16 +2,17 @@ const { Router } = require('express');
 const routes = Router();
 
 const userAuth = require('../middlewares/CheckTokenMiddleware');
-const CartController = require('../controller/CartController');
+const CreateUserCartController = require('../controllers/cart/CreateUserCartController');
+const GetUserCartController = require('../controllers/cart/GetUserCartController');
 
 routes.post('/:carId',
   userAuth,
-  CartController.create
+  CreateUserCartController.createCart
 );
 
 routes.get('/self',
   userAuth,
-  CartController.get
+  GetUserCartController.getCart
 );
 
 module.exports = routes;

@@ -3,13 +3,13 @@ const routes = Router();
 const multer = require('multer');
 
 const documentMulterConfig = require('../config/DocumentMulterConfig');
-const DocumentController = require('../controller/DocumentController');
 const userAuth = require('../middlewares/CheckTokenMiddleware');
+const CreateDocumentController = require('../controllers/document/CreateDocumentController');
 
 routes.post('/upload',
   multer(documentMulterConfig).single('filename'),
   userAuth,
-  DocumentController.upload
+  CreateDocumentController.createDocument
 );
 
 module.exports = routes;
