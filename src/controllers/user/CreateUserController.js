@@ -1,4 +1,4 @@
-const CreateUserService = require('../../services/user/CreateUserService');
+const createUserService = require('../../services/user/CreateUserService');
 const UserValidator = require('../../validators/user/UserValidator');
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
       const validator = await UserValidator(req.body);
       if (validator.error) throw validator.error;
 
-      const user = CreateUserService({
+      const users = await createUserService({
         name,
         last_name,
         email,
@@ -19,10 +19,11 @@ module.exports = {
         cep,
         role
       });
-      res.status(201).json(user);
+
+      return res.status(201).json(users);
     } catch (error) {
-      res.status(400).json({
-        error: 'Registration failed!',
+      return res.status(400).json({
+        error: 'Registration failed',
         message: error.message
       });
     }

@@ -15,7 +15,7 @@ module.exports = async body => {
       .required()
   });
   try {
-    await schema.validateAsync(body);
+    return await schema.validateAsync(body);
   } catch (error) {
     return error;
   }

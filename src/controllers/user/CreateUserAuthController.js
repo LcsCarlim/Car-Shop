@@ -6,13 +6,15 @@ module.exports = {
     try {
       const { email, password } = req.body;
 
-      const validatorAuth = await UserAuthValidator(req.body);
-      if (validatorAuth.error) throw validatorAuth.error;
+      const validator = await UserAuthValidator(req.body);
 
-      const auth = await createUserAuthService(email, password);
+      if (validator.error) throw validator.error;
+
+      const usersAuth = await createUserAuthService({ email, password });
+
       res.status(200).json({
         message: 'Authentication successful',
-        auth
+        usersAuth
       });
     } catch (error) {
       res.status(400).json({
