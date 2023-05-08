@@ -11,25 +11,25 @@ const LogoutEnterpriseController = require('../controllers/enterprise/LogoutEnte
 
 routes.post('/',
   userAuth,
-  CreateEnterpriseController.createEnterprise
+  CreateEnterpriseController
 );
 routes.post('/login',
-  EnterpriseAuthController.enterpriseAuth
+  EnterpriseAuthController
 );
 
 routes.get('/:id',
   userAuth,
-  FindEnterpriseByIdController.findEnterprise
+  FindEnterpriseByIdController
 );
 
 routes.get('/get',
   userAuth,
-  ListEnterpriseController.listEnterprise
+  ListEnterpriseController
 );
 
 routes.post('/logout',
   userLogout,
-  LogoutEnterpriseController.logout
+  LogoutEnterpriseController
 );
 
 module.exports = routes;

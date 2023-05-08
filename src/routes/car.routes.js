@@ -16,31 +16,32 @@ const ListAnnouncementController = require('../controllers/car/ListAnnouncementC
 routes.post('/createcar',
   multer(carMulterConfig).single('filename'),
   enterpriseAuth,
-  CreateCarController.createCar
+  CreateCarController
 );
 
 routes.delete('/delete/:id',
   userAuth,
-  DeleteAnnouncementController.deleteAnnouncement);
+  DeleteAnnouncementController
+);
 
 routes.get('/details/:id',
-  DetailsController.details
+  DetailsController
 );
 
 routes.get('/:company_name',
-  FindAnnouncementByNameController.findAnnouncementByName
+  FindAnnouncementByNameController
 );
 
 routes.get('/status/available/:status',
-  FindStatusAvailableController.findStatusAvailable
+  FindStatusAvailableController
 );
 
 routes.get('/status/sold/:status',
-  FindStatusSoldController.findStatusSold
+  FindStatusSoldController
 );
 
 routes.get('/',
-  ListAnnouncementController.listAnnouncement
+  ListAnnouncementController
 );
 
 module.exports = routes;

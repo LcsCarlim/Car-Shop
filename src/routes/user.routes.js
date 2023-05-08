@@ -11,43 +11,49 @@ const FindUserByIdController = require('../controllers/user/FindUserByIdControll
 const GetUserCartController = require('../controllers/cart/GetUserCartController');
 const ListUserController = require('../controllers/user/ListUserController');
 const LogoutUserController = require('../controllers/user/LogoutUserController');
+const GetUserSelfInfoController = require('../controllers/user/GetUserSelfInfoController');
 
 routes.post('/buycar/:CNPJ/:carId',
   userAuth,
-  BuyCarController.buyCar
+  BuyCarController
 );
 
 routes.post('/auth',
-  CreateUserAuthController.userAuth
+  CreateUserAuthController
 );
 
 routes.post('/register',
-  CreateUserController.createUser
+  CreateUserController
 );
 
 routes.post('/deposit',
   userAuth,
-  DepositAmountController.depositAmount
+  DepositAmountController
 );
 
 routes.get('/:id',
   userAuth,
-  FindUserByIdController.findById
+  FindUserByIdController
+);
+
+routes.get('/selfinfo',
+  userAuth,
+  GetUserSelfInfoController
 );
 
 routes.get('/getself',
   userAuth,
-  GetUserCartController.getCart
+  GetUserCartController
 );
 
 routes.get('/info',
   userAuth,
-  ListUserController.list
+  ListUserController
 );
 
 routes.post('/logout',
   userLogout,
-  LogoutUserController.logout
+  LogoutUserController
 );
 
 module.exports = routes;

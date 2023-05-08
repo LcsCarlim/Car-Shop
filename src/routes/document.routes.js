@@ -9,7 +9,7 @@ const CreateDocumentController = require('../controllers/document/CreateDocument
 routes.post('/upload',
   multer(documentMulterConfig).single('filename'),
   userAuth,
-  CreateDocumentController.createDocument
+  CreateDocumentController
 );
 
 module.exports = routes;

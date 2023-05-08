@@ -7,12 +7,12 @@ const GetUserCartController = require('../controllers/cart/GetUserCartController
 
 routes.post('/:carId',
   userAuth,
-  CreateUserCartController.createCart
+  CreateUserCartController
 );
 
 routes.get('/self',
   userAuth,
-  GetUserCartController.getCart
+  GetUserCartController
 );
 
 module.exports = routes;
