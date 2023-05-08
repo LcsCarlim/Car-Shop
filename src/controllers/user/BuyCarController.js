@@ -1,4 +1,4 @@
-const BuyCarService = require('../../services/user/BuyCarService');
+const buyCarService = require('../../services/user/BuyCarService');
 
 module.exports = {
   async buyCar (req, res) {
@@ -7,7 +7,7 @@ module.exports = {
       const { CNPJ, carId } = req.params;
       const { balance } = req.body;
 
-      const buy = await BuyCarService(id, CNPJ, carId, balance);
+      const buy = await buyCarService(id, CNPJ, balance, carId);
       res.status(200).json(buy);
     } catch (error) {
       res.status(400).json({

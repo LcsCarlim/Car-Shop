@@ -5,11 +5,11 @@ module.exports = {
   async createDocument (req, res) {
     const { path } = req.file;
     try {
-      const { user_id } = req.user;
       const { name, document_type } = req.body;
+      const { id } = req.user;
       const { filename } = req.file;
 
-      const document = await createDocumentService(user_id, name, document_type, filename);
+      const document = await createDocumentService(filename, document_type, name, id);
       return res.status(201).json(document);
     } catch (error) {
       return res.status(400).json({

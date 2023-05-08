@@ -1,8 +1,9 @@
 const EnterpriseModel = require('../../database/model/EnterpriseModel');
 const DocumentModel = require('../../database/model/DocumentModel');
 const UserModel = require('../../database/model/UserModel');
+const GetCepGateway = require('../../gateway/GetCepGateway');
 
-module.exports = async ({ role, company_name, CNPJ, address, user_id, commercial_phone }) => {
+module.exports = async ({ role, company_name, CNPJ, cep, user_id, commercial_phone }) => {
   if (role !== 'Owner' && role !== 'Super') throw new Error('Without permission');
 
   const enterpriseExists = await EnterpriseModel.findOne({
@@ -32,11 +33,13 @@ module.exports = async ({ role, company_name, CNPJ, address, user_id, commercial
   });
   if (!CNPJExists) throw new Error('Invalid document!');
 
+  const response = await GetCepGateway(cep);
+
   const enterprise = await EnterpriseModel.create({
     owner_id: user_id,
     company_name,
     CNPJ,
-    address,
+    cep: response.data.logradouro,
     commercial_phone
   });
 

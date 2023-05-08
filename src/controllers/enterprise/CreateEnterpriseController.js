@@ -5,7 +5,7 @@ module.exports = {
   async createEnterprise (req, res) {
     try {
       const { role, id } = req.user;
-      const { company_name, CNPJ, address, commercial_phone } = req.body;
+      const { company_name, CNPJ, cep, commercial_phone } = req.body;
 
       const validator = await EnterpriseAuthValidator(req.body);
       if (validator.error) throw validator.error;
@@ -16,7 +16,7 @@ module.exports = {
           user_id: id,
           company_name,
           CNPJ,
-          address,
+          cep,
           commercial_phone
         }
       );

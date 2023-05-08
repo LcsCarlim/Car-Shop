@@ -9,8 +9,11 @@ module.exports = {
       const validor = await EnterpriseAuthValidor(req.body);
       if (validor.error) throw validor.error;
 
-      const auth = await enterpriseAuthService(CNPJ, commercial_phone);
-      res.status(200).json(auth);
+      const enterpriseAuth = await enterpriseAuthService(CNPJ, commercial_phone);
+      res.status(200).json({
+        message: 'Authentication successful',
+        enterpriseAuth
+      });
     } catch (error) {
       res.status(400).json({
         error: 'Something wrong happened, try again!',

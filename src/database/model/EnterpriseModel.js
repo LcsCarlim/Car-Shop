@@ -9,7 +9,7 @@ const Enterprise = new mongoose.Schema({
     type: String,
     required: true
   },
-  address: {
+  cep: {
     type: String,
     required: true
   },
