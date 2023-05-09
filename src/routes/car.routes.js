@@ -32,11 +32,11 @@ routes.get('/find/:id',
   FindAnnouncementByIdController
 );
 
-routes.get('/status/available/:status',
+routes.get('/status/available/',
   FindStatusAvailableController
 );
 
-routes.get('/status/sold/:status',
+routes.get('/status/sold/',
   FindStatusSoldController
 );
 

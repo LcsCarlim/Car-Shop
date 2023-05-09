@@ -1,10 +1,7 @@
 const CarsModel = require('../../database/model/CarsModel');
 
-module.exports = async (status) => {
-  const statusSold = await CarsModel.find({
-    status
-  });
-  if (status !== 'Sold') throw new Error('Not found');
+module.exports = async () => {
+  const statusSold = await CarsModel.find({ status: 'Sold' });
 
   const newStatus = await Promise.all(
     statusSold.map(async (newStatusSold) => {

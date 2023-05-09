@@ -2,7 +2,7 @@ const CarsModel = require('../../database/model/CarsModel');
 const EnterpriseModel = require('../../database/model/EnterpriseModel');
 
 module.exports = async () => {
-  const cars = await CarsModel.find();
+  const cars = await CarsModel.find({ status: 'Available' });
 
   const annoucements = await Promise.all(
     cars.map(async (anounce) => {
