@@ -2,10 +2,10 @@ const CarsModel = require('../../database/model/CarsModel');
 const EnterpriseModel = require('../../database/model/EnterpriseModel');
 
 module.exports = async (id) => {
-  const company = await EnterpriseModel.findOne(id);
+  const company = await EnterpriseModel.findById(id);
   if (!company) throw new Error('Enterprise not found!');
 
-  const cars = await CarsModel.find({ enterprise_id: company._id });
+  const cars = await CarsModel.find({ from_enterprise: company._id });
 
   const annoucements = await Promise.all(
     cars.map(async (anounce) => {
@@ -23,7 +23,8 @@ module.exports = async (id) => {
         year: newAnounce.year,
         price: new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(newAnounce.price),
         status: newAnounce.status,
-        id: newAnounce._id
+        id_car: newAnounce._id,
+        enterprise_id: newAnounce.from_enterprise
       };
     })
   );

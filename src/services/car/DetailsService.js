@@ -7,7 +7,7 @@ module.exports = async (id) => {
   });
   if (!findCar) throw new Error('Car not found!');
 
-  const company = await EnterpriseModel.findById(findCar.enterprise_id);
+  const company = await EnterpriseModel.findById(findCar.from_enterprise);
 
   const car = {
     ...findCar.toObject(),
