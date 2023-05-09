@@ -5,7 +5,10 @@ module.exports = async (req, res) => {
   const { role } = req.user;
   try {
     const deleteAnnounce = await deleteAnnouncementService(id, role);
-    res.status(200).json(deleteAnnounce);
+    res.status(200).json({
+      message: 'Announcement deleted!',
+      deleteAnnounce
+    });
   } catch (error) {
     res.status(400).json({
       error: 'Something wrong happened, try again',
