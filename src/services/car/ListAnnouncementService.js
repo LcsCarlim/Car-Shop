@@ -6,7 +6,7 @@ module.exports = async () => {
 
   const annoucements = await Promise.all(
     cars.map(async (anounce) => {
-      const enterprise = await EnterpriseModel.findById(anounce.enterprise_id);
+      const enterprise = await EnterpriseModel.findById(anounce.from_enterprise);
 
       const newAnounce = {
         ...anounce.toObject(),
