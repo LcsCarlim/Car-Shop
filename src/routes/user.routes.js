@@ -31,7 +31,7 @@ routes.post('/deposit',
   DepositAmountController
 );
 
-routes.get('/:id',
+routes.get('/find/:id',
   userAuth,
   FindUserByIdController
 );

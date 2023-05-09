@@ -8,7 +8,7 @@ const userAuth = require('../middlewares/CheckTokenMiddleware');
 const CreateCarController = require('../controllers/car/CreateCarController');
 const DeleteAnnouncementController = require('../controllers/car/DeleteAnnouncementController');
 const DetailsController = require('../controllers/car/DetailsController');
-const FindAnnouncementByNameController = require('../controllers/car/FindAnnouncementByNameController');
+const FindAnnouncementByIdController = require('../controllers/car/FindAnnouncementByIdController');
 const FindStatusAvailableController = require('../controllers/car/FindStatusAvailableController');
 const FindStatusSoldController = require('../controllers/car/FindStatusSoldController');
 const ListAnnouncementController = require('../controllers/car/ListAnnouncementController');
@@ -28,8 +28,8 @@ routes.get('/details/:id',
   DetailsController
 );
 
-routes.get('/:company_name',
-  FindAnnouncementByNameController
+routes.get('/find/:id',
+  FindAnnouncementByIdController
 );
 
 routes.get('/status/available/:status',
@@ -40,7 +40,7 @@ routes.get('/status/sold/:status',
   FindStatusSoldController
 );
 
-routes.get('/',
+routes.get('/list',
   ListAnnouncementController
 );
 

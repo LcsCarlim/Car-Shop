@@ -1,10 +1,8 @@
 const CarsModel = require('../../database/model/CarsModel');
 const EnterpriseModel = require('../../database/model/EnterpriseModel');
 
-module.exports = async (company_name) => {
-  const company = await EnterpriseModel.findOne({
-    company_name
-  });
+module.exports = async (id) => {
+  const company = await EnterpriseModel.findOne(id);
   if (!company) throw new Error('Enterprise not found!');
 
   const cars = await CarsModel.find({ enterprise_id: company._id });

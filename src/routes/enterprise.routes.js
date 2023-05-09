@@ -17,7 +17,7 @@ routes.post('/login',
   EnterpriseAuthController
 );
 
-routes.get('/:id',
+routes.get('/find/:id',
   userAuth,
   FindEnterpriseByIdController
 );
