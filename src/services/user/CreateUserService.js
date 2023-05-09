@@ -33,6 +33,7 @@ module.exports = async ({ name, last_name, email, password, confirm_password, ph
     address: user.cep,
     phone_number: user.phone_number,
     balance: user.balance,
+    role: user.role,
     id: user._id
   };
 };

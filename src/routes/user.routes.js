@@ -26,7 +26,7 @@ routes.post('/register',
   CreateUserController
 );
 
-routes.post('/deposit',
+routes.post('/deposit/:id',
   userAuth,
   DepositAmountController
 );

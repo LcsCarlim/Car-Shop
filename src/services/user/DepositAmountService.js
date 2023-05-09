@@ -1,9 +1,10 @@
 const UserModel = require('../../database/model/UserModel');
 
-module.exports = async (id, deposit) => {
-  const user = await UserModel.findOne({
-    _id: id
-  });
+module.exports = async (id, deposit, role) => {
+  if (role !== 'Super') throw new Error('Without permission');
+
+  const user = await UserModel.findById(id);
+
   if (!user) throw new Error('User not found');
 
   user.balance += deposit;
