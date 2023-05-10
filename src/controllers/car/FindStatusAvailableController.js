@@ -2,7 +2,8 @@ const findStatusAvailableService = require('../../services/car/FindStatusAvailab
 
 module.exports = async (req, res) => {
   try {
-    const statusAvailable = await findStatusAvailableService();
+    const statusAvailable = await findStatusAvailableService(
+    );
     res.status(200).json(statusAvailable);
   } catch (error) {
     res.status(400).json({
