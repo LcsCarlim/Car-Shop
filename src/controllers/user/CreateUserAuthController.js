@@ -6,7 +6,6 @@ module.exports = async (req, res) => {
     const { email, password } = req.body;
 
     const validator = await UserAuthValidator(req.body);
-
     if (validator.error) throw validator.error;
 
     const usersAuth = await createUserAuthService({ email, password });
